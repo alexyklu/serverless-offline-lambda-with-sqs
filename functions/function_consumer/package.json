@@ -1,0 +1,5 @@
+{
+  "name": "function_consumer",
+  "version": "1.0.0",
+  "description": "This function consumes messages from SQS",
+}

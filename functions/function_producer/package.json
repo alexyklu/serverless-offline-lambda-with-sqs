@@ -1,0 +1,5 @@
+{
+  "name": "function_producer",
+  "version": "1.0.0",
+  "description": "This function fetches facts about cats and sends messages for them",
+}

@@ -1,0 +1,10 @@
+{
+  "name": "serverless-offline-lambda-with-sqs",
+  "version": "1.0.0",
+  "description": "An example that shows how to run a lambda function that consumes from a local SQS queue.",
+  "dependencies": {
+    "serverless-domain-manager": "2.6.5",
+    "serverless-offline": "3.25.17",
+    "serverless-offline-sqs": "^1.5.0"
+  }
+}

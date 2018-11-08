@@ -1,0 +1,7 @@
+stageName: local
+stageFullName: local
+
+sqs:
+  cat_facts:
+    arn: arn:aws:sqs:region:XXXXXX:cat_facts
+    url: http://0.0.0.0:9324/queue/cat_facts

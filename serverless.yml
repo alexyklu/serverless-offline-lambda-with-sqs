@@ -1,0 +1,54 @@
+service: serverless-offline-sqs-tutorial
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: local
+  region: eu-west-2
+
+package:
+  individually: true
+  exclude:
+  - functions/**
+  - stage_variables/**
+
+plugins:
+  - serverless-offline
+  - serverless-offline-sqs
+  - serverless-domain-manager
+
+custom:
+  stage: ${file(stage_variables/${opt:stage, self:provider.stage}.yaml)}
+  serverless-offline-sqs:
+    endpoint: http://0.0.0.0:9324
+    region: ${self:provider.region}
+    accessKeyId: root
+    secretAccessKey: root
+
+functions:
+  message_producer:
+    handler: functions/function_producer/handler_producer.producer
+    package:
+      include:
+      - functions/function_producer/**/*
+    environment:
+      CAT_FACTS_QUEUE_URL: ${self:custom.stage.sqs.cat_facts.url}
+    events:
+    - http:
+        path: api/cat_facts
+        method: get
+        integration: lambda
+  message_consumer:
+    handler: functions/function_consumer/handler_consumer.consumer
+    package:
+      include:
+      - functions/function_consumer/**/*
+    events:
+      - sqs: ${self:custom.stage.sqs.cat_facts.arn}
+
+resources:
+  Resources:
+    cat_facts:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: cat_facts
