@@ -1,5 +1,5 @@
 # Overview
-An example that shows how to run lambda functions with serverless-offline and interact with a local SQS queue.
+A working example that shows how to run lambda functions with serverless-offline and interact with a local SQS queue.
 
 # Setup
 
